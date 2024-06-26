@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+interester_layers=""
 
 if [ $1 == "ld" ] ; then
 	mkdir -p data_results
@@ -26,8 +27,13 @@ if [ $1 == "ld" ] ; then
 fi
 
 if [ $1 == "rp" ] ; then
-	source ~soft_bio_267/initializes/init_python
+# string_channels, original_databases
+	source ~/dev_py/venv/bin/activate
 	name_dir=`date +%d_%m_%Y`
     mkdir -p ./meta_reports/
-	report_html -t ./metareport.py  -d `ls data_results/* | tr -s [:space:] "," | sed 's/,*$//g'` -o "$name_dir"
+	mkdir -p ./meta_reports/$name_dir
+	echo -e "$2" > data_results/selection
+	report_html -t ./metareport.py -d `ls data_results/* | tr -s [:space:] "," | sed 's/,*$//g'` -o "${name_dir}_$2"
+	mv ${name_dir}_$2.html ./meta_reports/$name_dir/
+	rm data_results/selection
 fi

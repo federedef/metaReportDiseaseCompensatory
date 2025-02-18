@@ -28,7 +28,7 @@ fi
 
 if [ $1 == "rp" ] ; then
 # string_channels, original_databases
-	source ~/dev_py/venv/bin/activate
+	source ~soft_bio_267/initializes/init_python
 	name_dir=`date +%d_%m_%Y`
     mkdir -p ./meta_reports/
 	mkdir -p ./meta_reports/$name_dir
